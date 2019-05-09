@@ -23,8 +23,8 @@ export default class CreateSurvey extends Component {
 
 
       <div>
-        <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Create Survey</Button>
-        {<Collapse isOpen={this.state.collapse}>
+        {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Create Survey</Button>
+        {<Collapse isOpen={this.state.collapse}> */}
           <Card>
             <CardBody>
               <Form>
@@ -84,7 +84,7 @@ export default class CreateSurvey extends Component {
               </Form>
             </CardBody>
           </Card>
-        </Collapse>}
+        {/* </Collapse>} */}
       </div>
     )
   }

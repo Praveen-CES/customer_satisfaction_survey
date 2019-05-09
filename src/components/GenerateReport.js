@@ -30,8 +30,8 @@ return (
     
  
     <div>
-     <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Generate Report</Button>
-        { <Collapse isOpen={this.state.collapse}>
+     {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Generate Report</Button>
+        { <Collapse isOpen={this.state.collapse}> */}
           <Card>
             <CardBody>
               <Form>
@@ -69,15 +69,19 @@ return (
                 <Button type = "button" outline color="primary" onClick = {this.toggleReportShown}>Generate Report</Button>{' '}
                 {this.state.isReportShown &&
                 <FormGroup>
+                  <div>
                 <Label>Customer Satisfactory Percentage : </Label>
+                </div>
+                <div>
                 <Button type = "button" outline color="primary">View Answers</Button>{' '}
+                </div>
                 </FormGroup>
                 
                 }
               </Form>
             </CardBody>
           </Card>
-        </Collapse>}
+        {/* </Collapse>} */}
   </div>
 )
 }

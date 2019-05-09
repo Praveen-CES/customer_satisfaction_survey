@@ -19,21 +19,24 @@ export default class AddQuestions extends Component {
 
 
       <div>
-        <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Add Questions</Button>
-        {<Collapse isOpen={this.state.collapse}>
+        {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Add Questions</Button>
+        {<Collapse isOpen={this.state.collapse}> */}
           <Card>
             <CardBody>
+              <div>
               <Form>
+               
                 <FormGroup>
                 <Label for="questions">Question : </Label>
                   <Input type="text" name="questions" id="exampleQuestions" placeholder="Type your question here" />
-                  <Button type = "button" color="primary" size="lg" active >Submit</Button>{' '}
+                  <Button type = "button" color="primary" size="lg" active >Submit</Button>{' '}                  
                 </FormGroup>
                 
               </Form>
+              </div>
             </CardBody>
           </Card>
-        </Collapse>}
+        {/* </Collapse>} */}
       </div>
     )
   }

@@ -26,8 +26,8 @@ return (
     
  
     <div>
-    <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>View Questions</Button>
-    {<Collapse isOpen={this.state.collapse}>
+    {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>View Questions</Button>
+    {<Collapse isOpen={this.state.collapse}> */}
       <Card>
         <CardBody>
         <FormGroup>
@@ -43,7 +43,7 @@ return (
         </FormGroup>
         </CardBody>
       </Card>
-    </Collapse>}
+    {/* </Collapse>} */}
   </div>
 )
 }
