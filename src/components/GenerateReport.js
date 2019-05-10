@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { Collapse, Button, CardBody, Card, Form, FormGroup, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import YearPicker from "react-year-picker";
 //import { Form } from 'antd';
+const divStyle = {
+  width: "300px",
+  margin: "20px"
+}
 export default class GenerateReport extends Component {
   constructor(props) {
     super(props);
@@ -29,11 +33,10 @@ render() {
 return (
     
  
-    <div>
+    <div style={divStyle}>
      {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Generate Report</Button>
         { <Collapse isOpen={this.state.collapse}> */}
-          <Card>
-            <CardBody>
+         
               <Form>
                 <FormGroup>
                 <Label for="exampleSelect">Customer Name</Label>
@@ -79,8 +82,7 @@ return (
                 
                 }
               </Form>
-            </CardBody>
-          </Card>
+            
         {/* </Collapse>} */}
   </div>
 )

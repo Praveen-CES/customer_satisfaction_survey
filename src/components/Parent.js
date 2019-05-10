@@ -33,9 +33,9 @@ export default class Parent extends Component {
         return(  
             
             <Router>     
-           <Header ></Header>
-            <Row >
-                <Col xs="12" md="2">
+                <Header ></Header>
+            <Row  className="m-0">
+            <Col xs="12" md="2">
             <Sidebar />
         </Col>
         <Col xs="12" md="10">

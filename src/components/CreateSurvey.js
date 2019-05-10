@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { Collapse, Button, CardBody, Card, Form, FormGroup, Label, Input } from 'reactstrap';
 import YearPicker from "react-year-picker";
+const divStyle = {
+  width: "300px",
+  margin: "20px"
+}
 export default class CreateSurvey extends Component {
   constructor(props) {
     super(props);
@@ -22,11 +26,10 @@ export default class CreateSurvey extends Component {
     return (
 
 
-      <div>
+      <div style={divStyle}>
         {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Create Survey</Button>
         {<Collapse isOpen={this.state.collapse}> */}
-          <Card>
-            <CardBody>
+          
               <Form>
                 <FormGroup>
                   <Label for="exampleSelect">Survey Name</Label>
@@ -65,8 +68,9 @@ export default class CreateSurvey extends Component {
                   <Input type="email" name="email" id="exampleEmail" placeholder="Type BCC email recepeints" />
                 </FormGroup>
                 <FormGroup>
+                <Label for="exampleText">Select Questions</Label>
                 <FormGroup check>
-                <Label>Select Questions</Label>
+                
                 {this.state.selectMulti.map((data)=> 
                 <div>  
               <Label check>
@@ -82,8 +86,7 @@ export default class CreateSurvey extends Component {
                 </FormGroup>
                 <Button type="button" outline color="primary">Create Survey</Button>{' '}
               </Form>
-            </CardBody>
-          </Card>
+            
         {/* </Collapse>} */}
       </div>
     )

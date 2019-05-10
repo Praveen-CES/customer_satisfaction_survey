@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import { Collapse, Button, CardBody, Card, Form, FormGroup, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Row, Col,Collapse, Button, CardBody, Card, Form, FormGroup, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+const divStyle = {
+  width: "300px",
+  margin: "20px"
+}
 export default class ViewQuestions extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +20,6 @@ export default class ViewQuestions extends Component {
     var selectedValueIndex=this.state.selectMulti.findIndex(k => k===selectedValue);
         var arr=this.state.selectMulti;
         arr.splice(selectedValueIndex,1)
-    debugger
     this.setState({
       selectMulti:arr
     })
@@ -25,24 +28,29 @@ render() {
 return (
     
  
-    <div>
+    <div style={divStyle}>
     {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>View Questions</Button>
     {<Collapse isOpen={this.state.collapse}> */}
-      <Card>
-        <CardBody>
+      
         <FormGroup>
+        <Row className="justify-content-center align-items-center">
+                        <Col lg="10" md="10">
           {/* <Label for="selectQuestions">Select Questions</Label> */}
           {/* <Input type="select" name="selectMulti" id="selectMulti" multiple> */}
           {this.state.selectMulti.map((data)=>     
           <div> 
-                
-            <Label>{data}</Label><button  onClick={this.removeSelectMulti.bind(this,data)}>delete</button>
+            
+            <Label>{data}</Label>
+           
+            
+            <button  onClick={this.removeSelectMulti.bind(this,data)} className="btn btn-primary"><span className="fa fa-trash"></span></button>
+           
             </div>
           )}                     
           {/* </Input> */}
+          </Col></Row>
         </FormGroup>
-        </CardBody>
-      </Card>
+       
     {/* </Collapse>} */}
   </div>
 )
