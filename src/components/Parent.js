@@ -7,6 +7,7 @@ import CreateSurvey from './CreateSurvey';
 import GenerateReport from './GenerateReport';
 import Header from './Header';
 import Sidebar from './Sidebar';
+
 const routes = [
     {
       path: "/AddQuestions",      
@@ -26,17 +27,26 @@ const routes = [
         main: () => <GenerateReport/>
       }
   ];
+  
 export default class Parent extends Component {
 
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+          isOpen: true
+        }
+      }
+      toggle = () => {
+        this.setState({isOpen: !this.state.isOpen});
+      }
     render() {
         return(  
             
             <Router>     
                 <Header ></Header>
             <Row  className="m-0">
-            <Col xs="12" md="2">
-            <Sidebar />
+            <Col className="p-0">
+            <Sidebar toggle={this.toggle} isOpen={this.state.isOpen}/>
         </Col>
         <Col xs="12" md="10">
 

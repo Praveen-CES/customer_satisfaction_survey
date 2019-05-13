@@ -72,10 +72,10 @@ return (
                 <Button type = "button" outline color="primary" onClick = {this.toggleReportShown}>Generate Report</Button>{' '}
                 {this.state.isReportShown &&
                 <FormGroup>
-                  <div>
+                  <div style = {divStyle}>
                 <Label>Customer Satisfactory Percentage : </Label>
                 </div>
-                <div>
+                <div style = { divStyle}>
                 <Button type = "button" outline color="primary">View Answers</Button>{' '}
                 </div>
                 </FormGroup>

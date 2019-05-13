@@ -19,3 +19,9 @@ code {
 .search-qstn{
   position: relative;
 } */
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width : 50%;
+  }

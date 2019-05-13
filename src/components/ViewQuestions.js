@@ -16,7 +16,8 @@ export default class ViewQuestions extends Component {
   toggle() {
     this.setState(state => ({ collapse: !state.collapse }));
   }
-  removeSelectMulti(selectedValue){       
+  removeSelectMulti(selectedValue){   
+    console.log("selectedValue", selectedValue)    
     var selectedValueIndex=this.state.selectMulti.findIndex(k => k===selectedValue);
         var arr=this.state.selectMulti;
         arr.splice(selectedValueIndex,1)
@@ -29,29 +30,27 @@ return (
     
  
     <div style={divStyle}>
-    {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>View Questions</Button>
-    {<Collapse isOpen={this.state.collapse}> */}
+   
       
         <FormGroup>
         <Row className="justify-content-center align-items-center">
                         <Col lg="10" md="10">
-          {/* <Label for="selectQuestions">Select Questions</Label> */}
-          {/* <Input type="select" name="selectMulti" id="selectMulti" multiple> */}
+         
           {this.state.selectMulti.map((data)=>     
-          <div> 
+          <div style={divStyle}> 
             
-            <Label>{data}</Label>
+            <Label className = "mr-4">{data}</Label>
            
             
-            <button  onClick={this.removeSelectMulti.bind(this,data)} className="btn btn-primary"><span className="fa fa-trash"></span></button>
+            <Button outline color="danger" type="button" onClick={this.removeSelectMulti.bind(this,data)} ><span className="fa fa-trash"></span></Button>
            
             </div>
           )}                     
-          {/* </Input> */}
+         
           </Col></Row>
         </FormGroup>
        
-    {/* </Collapse>} */}
+   
   </div>
 )
 }

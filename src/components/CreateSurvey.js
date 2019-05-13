@@ -11,9 +11,11 @@ export default class CreateSurvey extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       collapse: false,
-      selectMulti: ["Sample Question 1", "Sample Question 2", "Sample Question 3"]
+      selectMulti: ["Sample Question 1", "Sample Question 2", "Sample Question 3"],
+     
     };
     this.handleChange = this.handleChange.bind(this);
+   
 
   }
   toggle() {
@@ -21,6 +23,10 @@ export default class CreateSurvey extends Component {
   }
   handleChange(date) {
     console.log(date);
+  }
+  handleSubmit = evt => {
+    const {data} = this.state;
+    console.log(data, evt);
   }
   render() {
     return (
@@ -84,7 +90,7 @@ export default class CreateSurvey extends Component {
 
 
                 </FormGroup>
-                <Button type="button" outline color="primary">Create Survey</Button>{' '}
+                <Button type="button" outline color="primary" onClick = {(e)=> {this.handleSubmit(e)}}>Create Survey</Button>{' '}
               </Form>
             
         {/* </Collapse>} */}

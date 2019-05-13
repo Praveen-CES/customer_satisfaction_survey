@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import logo from '../CESLogo.png';
-
+import '../index.css'
 const colStyle = {
   border: '1px solid black' , height : '150px'
 };
@@ -9,6 +9,7 @@ const colStyle = {
 const rowStyle = {
   border: '1px solid black' , height : '150px'
 };
+
 export default class Header extends Component {
 
   render() {
@@ -17,7 +18,7 @@ export default class Header extends Component {
       <div style={rowStyle}>
         <Row className="m-0" style={rowStyle} >
           <Col xs="12" md="2" style={colStyle}>
-          <img src={logo}/>
+          <img src={logo} class="center" allign="middle"/>
           </Col>
           <Col xs="12" md="10" style={colStyle}>
       <h1 style ={{textAlign: "center"}}>Customer Satisfaction Survey</h1>
