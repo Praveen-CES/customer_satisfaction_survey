@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { Collapse, Button, CardBody, Card, Form, FormGroup, Label, Input ,Container, Row, Col} from 'reactstrap';
+import {  Button, CardBody, Card, Form, FormGroup, Label, Input ,Container, Row, Col} from 'reactstrap';
+import { connect } from "react-redux";
 
-
+const mapStateToProps = state => {
+  return { questions : state.questions}
+}
 const divStyle = {
   width: "300px",
   margin: "20px"
@@ -9,16 +12,14 @@ const divStyle = {
 const buttonStyle = {
     "float":'left '
 }
-export default class AddQuestions extends Component {
+ class AddQuestions1 extends Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
-    this.state = { collapse: false,
+   
+    this.state = { 
       questions: [{question : ""}] };
   }
-  toggle() {
-    this.setState(state => ({ collapse: !state.collapse }));
-  }
+  
   onClickPreventDefault(e) {
     alert('onClickPreventDefault called, form will not submit');
     e.preventDefault();
@@ -39,8 +40,9 @@ handleAddQuestion = () => {
 };
 handleRemoveQuestion(selectedValue){   
   console.log("selectedValue", selectedValue)   
-  var selectedValueIndex=this.state.questions.findIndex(k => k.name===selectedValue);
-      var arr=this.state.questions;
+  var selectedValueIndex=this.state.questions
+    .findIndex(k => k.name===selectedValue);
+  var arr=this.state.questions;
       arr.splice(selectedValueIndex,1);
       console.log(arr);
       console.log(this.state.questions);
@@ -107,3 +109,6 @@ handleRemoveQuestion(selectedValue){
     )
   }
 }
+
+const AddQuestions = connect(mapStateToProps)(AddQuestions1)
+export default AddQuestions;

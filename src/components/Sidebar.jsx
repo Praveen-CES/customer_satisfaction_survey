@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Nav, NavItem, NavLink } from 'reactstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import AddQuestions from './AddQuestions';
+import AddQuestions from './AddQuestions.jsx';
 import ViewQuestions from './ViewQuestions';
 import CreateSurvey from './CreateSurvey';
 import GenerateReport from './GenerateReport';
