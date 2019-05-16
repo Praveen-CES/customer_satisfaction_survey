@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
-import {  Button, CardBody, Card, Form, FormGroup, Label, Input ,Container, Row, Col} from 'reactstrap';
+import {  Button,  Form, FormGroup, Label, Input , Row, Col} from 'reactstrap';
 import { connect } from "react-redux";
+import { addQuestion } from "../js/actions/index";
+import uuidv1 from "uuid";
+function mapDispatchToProps(dispatch) {
+  return { 
 
-const mapStateToProps = state => {
-  return { questions : state.questions}
+    addQuestion : question => dispatch(addQuestion(question))
+  };
 }
 const divStyle = {
   width: "300px",
@@ -28,7 +32,7 @@ const buttonStyle = {
 handleQuestionNameChange = idx => evt => {
   const newQuestions = this.state.questions.map((question, sidx) => {
     if (idx !== sidx) return question;
-    return { ...question, name: evt.target.value };
+    return { ...question, name: evt.target.value, id : uuidv1()  };
   });
 
   this.setState({ questions: newQuestions });
@@ -52,9 +56,11 @@ handleRemoveQuestion(selectedValue){
   })
 }
   handleSubmit = evt => {
-    
+    evt.preventDefault();
     const { questions } = this.state;
-    console.log("questions", questions)
+   
+    this.props.addQuestion({questions});
+    console.log(questions);
   }
   render() {
     return (
@@ -110,5 +116,5 @@ handleRemoveQuestion(selectedValue){
   }
 }
 
-const AddQuestions = connect(mapStateToProps)(AddQuestions1)
+const AddQuestions = connect(null, mapDispatchToProps)(AddQuestions1)
 export default AddQuestions;

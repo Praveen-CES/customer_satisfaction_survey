@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container, Row, Col} from 'reactstrap'
+import { Row, Col} from 'reactstrap'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AddQuestions from './AddQuestions.jsx';
 import ViewQuestions from './ViewQuestions';

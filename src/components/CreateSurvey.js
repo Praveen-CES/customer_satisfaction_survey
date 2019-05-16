@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import { Collapse, Button, CardBody, Card, Form, FormGroup, Label, Input } from 'reactstrap';
 import YearPicker from "react-year-picker";
+import {connect} from "react-redux";
 const divStyle = {
   width: "300px",
   margin: "20px"
 }
-export default class CreateSurvey extends Component {
+const mapStateToProps = state => {
+  return {questions : state.questions}
+}
+ class CreateSurvey1 extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.state = {
       collapse: false,
-      selectMulti: ["Sample Question 1", "Sample Question 2", "Sample Question 3"],
+      selectMulti: this.props.questions
      
     };
     this.handleChange = this.handleChange.bind(this);
@@ -29,6 +33,7 @@ export default class CreateSurvey extends Component {
     console.log(data, evt);
   }
   render() {
+    const { selectMulti } = this.state;
     return (
 
 
@@ -77,11 +82,11 @@ export default class CreateSurvey extends Component {
                 <Label for="exampleText">Select Questions</Label>
                 <FormGroup check>
                 
-                {this.state.selectMulti.map((data)=> 
+                {this.state.selectMulti && this.state.selectMulti.map((data)=> 
                 <div>  
               <Label check>
                 <Input type="checkbox" id="checkbox2" />{' '}
-                {data}
+                {data.name}
               </Label>
               </div>
                 )}
@@ -98,3 +103,5 @@ export default class CreateSurvey extends Component {
     )
   }
 }
+const CreateSurvey = connect(mapStateToProps)(CreateSurvey1);
+export default CreateSurvey;
