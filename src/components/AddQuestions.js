@@ -10,7 +10,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 const divStyle = {
-  width: "300px",
+  //width: "300px",
   margin: "20px"
 }
 const buttonStyle = {
@@ -43,13 +43,12 @@ handleAddQuestion = () => {
   });
 };
 handleRemoveQuestion(selectedValue){   
-  console.log("selectedValue", selectedValue)   
+  
   var selectedValueIndex=this.state.questions
     .findIndex(k => k.name===selectedValue);
   var arr=this.state.questions;
       arr.splice(selectedValueIndex,1);
-      console.log(arr);
-      console.log(this.state.questions);
+     
       
   this.setState({
     questions:arr
@@ -60,7 +59,7 @@ handleRemoveQuestion(selectedValue){
     const { questions } = this.state;
    
     this.props.addQuestion({questions});
-    console.log(questions);
+    
   }
   render() {
     return (
@@ -72,14 +71,14 @@ handleRemoveQuestion(selectedValue){
               <Form onSubmit = {this.handleSubmit}>
                
                 <FormGroup>
-                <Label for="questions">Question</Label>
+                <h3 for="questions">Add Questions</h3>
                 
                 {
                    this.state.questions.map((question,idx)=>{
                     return(
                   <div className="search-qstn" key={idx} style={divStyle}>
-                    <Row className="justify-content-center align-items-center">
-                        <Col lg="10" md="10">
+                    <Row>
+                        <Col lg="5" md="5" className="p-0">
                         <Input type="text" name="questions" id="exampleQuestions" placeholder="Type your question here" value={question.name}   onChange={this.handleQuestionNameChange(idx)}/>
                         </Col>
                         <Col lg="2" md="2">

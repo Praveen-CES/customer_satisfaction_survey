@@ -26,11 +26,11 @@ const mapStateToProps = state => {
     this.setState(state => ({ collapse: !state.collapse }));
   }
   handleChange(date) {
-    console.log(date);
+    
   }
   handleSubmit = evt => {
     const {data} = this.state;
-    console.log(data, evt);
+   
   }
   render() {
     const { selectMulti } = this.state;

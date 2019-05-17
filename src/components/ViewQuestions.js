@@ -16,14 +16,14 @@ class ViewQuestions1 extends Component {
     this.state = { collapse: false,
       selectMulti:this.props.questions
     };
-    console.log("this.props.questions", this.props.questions)
+   
   }
   toggle() {
     this.setState(state => ({ collapse: !state.collapse }));
   }
   removeSelectMulti(selectedValue){   
  
-    console.log("selectedValue",this.props.questions )
+   
     var selectedValueIndex=this.state.selectMulti.findIndex(k => k.id===selectedValue);
         var arr=this.props.questions;
         arr.splice(selectedValueIndex,1)
@@ -33,7 +33,7 @@ class ViewQuestions1 extends Component {
   }
 render() {
   const { selectMulti } = this.state;
-  console.log("selectMulti",selectMulti);
+
 return (
     
  

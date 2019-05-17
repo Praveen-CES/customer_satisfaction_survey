@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Collapse, Button, CardBody, Card, Form, FormGroup, Label, Input, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import YearPicker from "react-year-picker";
+import  Report  from "./Report";
+import { Link } from "react-router-dom";
 //import { Form } from 'antd';
 const divStyle = {
   width: "300px",
@@ -28,7 +30,14 @@ export default class GenerateReport extends Component {
     });
     
   } 
-
+handleSubmit = evt => {
+  //evt.preventDefault();
+  console.log("evt", evt);
+  //window.open( "/Report", 'www.google.com');
+  var href = '/report' + evt;
+  //<a href={href} target = "_blank"/>  
+  
+}
 render() {
 return (
     
@@ -76,7 +85,7 @@ return (
                 <Label>Customer Satisfactory Percentage : </Label>
                 </div>
                 <div style = { divStyle}>
-                <Button type = "button" outline color="primary">View Answers</Button>{' '}
+                <Button type = "button" outline color="primary" onClick ={(e) => this.handleSubmit(e)}><Link target="_blank" to="/Report" >View Report</Link></Button>{' '}
                 </div>
                 </FormGroup>
                 
