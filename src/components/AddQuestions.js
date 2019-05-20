@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import {  Button,  Form, FormGroup, Label, Input , Row, Col} from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import { connect } from "react-redux";
 import { addQuestion } from "../js/actions/index";
 import uuidv1 from "uuid";
 function mapDispatchToProps(dispatch) {
-  return { 
+  return {
 
-    addQuestion : question => dispatch(addQuestion(question))
+    addQuestion: question => dispatch(addQuestion(question))
   };
 }
 const divStyle = {
@@ -14,106 +14,109 @@ const divStyle = {
   margin: "20px"
 }
 const buttonStyle = {
-    "float":'left '
+  "float": 'left '
 }
- class AddQuestions1 extends Component {
+class QuestionsToAdd extends Component {
   constructor(props) {
     super(props);
-   
-    this.state = { 
-      questions: [{question : ""}] };
+
+    this.state = {
+      questions: [{ question: "" }]
+    };
   }
-  
+
   onClickPreventDefault(e) {
     alert('onClickPreventDefault called, form will not submit');
     e.preventDefault();
   }
 
-handleQuestionNameChange = idx => evt => {
-  const newQuestions = this.state.questions.map((question, sidx) => {
-    if (idx !== sidx) return question;
-    return { ...question, name: evt.target.value, id : uuidv1()  };
-  });
+  handleQuestionNameChange = idx => evt => {
+    const newQuestions = this.state.questions.map((question, sidx) => {
+      if (idx !== sidx) return question;
+      return { ...question, name: evt.target.value, id: uuidv1() };
+    });
 
-  this.setState({ questions: newQuestions });
-};
-handleAddQuestion = () => {
-  this.setState({
-    questions: this.state.questions.concat([{ question: "" }])
-  });
-};
-handleRemoveQuestion(selectedValue){   
-  
-  var selectedValueIndex=this.state.questions
-    .findIndex(k => k.name===selectedValue);
-  var arr=this.state.questions;
-      arr.splice(selectedValueIndex,1);
-     
-      
-  this.setState({
-    questions:arr
-  })
-}
+    this.setState({ questions: newQuestions });
+  };
+  handleAddQuestion = () => {
+    this.setState({
+      questions: this.state.questions.concat([{ question: "" }])
+    });
+  };
+  handleRemoveQuestion(selectedValue) {
+
+    var selectedValueIndex = this.state.questions
+      .findIndex(k => k.name === selectedValue);
+    var arr = this.state.questions;
+    arr.splice(selectedValueIndex, 1);
+
+
+    this.setState({
+      questions: arr
+    })
+  }
   handleSubmit = evt => {
     evt.preventDefault();
     const { questions } = this.state;
-   
-    this.props.addQuestion({questions});
-    
+
+    this.props.addQuestion({ questions });
+
   }
   render() {
     return (
 
 
-      <div style = {divStyle}>
-        
-              
-              <Form onSubmit = {this.handleSubmit}>
-               
-                <FormGroup>
-                <h3 for="questions">Add Questions</h3>
-                
-                {
-                   this.state.questions.map((question,idx)=>{
-                    return(
+      <div style={divStyle}>
+
+
+        <Form onSubmit={this.handleSubmit}>
+
+          <FormGroup>
+            <h3 for="questions">Add Questions</h3>
+
+            {
+              this.state.questions.map((question, idx) => {
+                return (
                   <div className="search-qstn" key={idx} style={divStyle}>
                     <Row>
-                        <Col lg="5" md="5" className="p-0">
-                        <Input type="text" name="questions" id="exampleQuestions" placeholder="Type your question here" value={question.name}   onChange={this.handleQuestionNameChange(idx)}/>
-                        </Col>
-                        <Col lg="2" md="2">
-                        <Button type = "button" outline color="danger"  onClick = {this.handleRemoveQuestion.bind(this, question.name)}><span className="fa fa-trash"></span></Button>
-                        </Col>
+                      <Col lg="5" md="5" className="p-0">
+                      
+                        <Input type="text" name="questions" id="exampleQuestions" placeholder="Type your question here" value={question.name} onChange={this.handleQuestionNameChange(idx)} />
+                      
+                      </Col>
+                      <Col lg="2" md="2">
+                        <Button type="button" outline color="danger" onClick={this.handleRemoveQuestion.bind(this, question.name)}><span className="fa fa-trash"></span></Button>
+                      </Col>
                     </Row>
                   </div>
-                    )
-                  })
-                }
-                <Row>
-                  <Col lg="10" md="10">
-                    <div style= {buttonStyle}>
-                      <Button type = "button" outline color = "primary" className= "mt-2" onClick = {this.handleAddQuestion}>Add Question</Button>
-                    </div>
-                  </Col>
-                </Row>
-                  <Row>
-                    <Col lg="10" md="10">
-                    <div style = {buttonStyle}>
-                    
-                    <Button type="button" outline color="primary" className="mt-2" onClick={(e)=> this.handleSubmit(e)} >Submit</Button>{' '}                                  
+                )
+              })
+            }
+            <Row>
+              <Col lg="10" md="10">
+                <div style={buttonStyle}>
+                  <Button type="button" outline color="primary" className="mt-2" onClick={this.handleAddQuestion}>Add Question</Button>
                 </div>
-                    </Col>
-                  </Row>
-                </FormGroup>
-                
-              </Form>
-             
-           
+              </Col>
+            </Row>
+            <Row>
+              <Col lg="10" md="10">
+                <div style={buttonStyle}>
+
+                  <Button type="button" outline color="primary" className="mt-2" onClick={(e) => this.handleSubmit(e)} >Submit</Button>{' '}
+                </div>
+              </Col>
+            </Row>
+          </FormGroup>
+
+        </Form>
+
+
       </div>
-   
+
     )
   }
 }
 
-const AddQuestions = connect(null, mapDispatchToProps)(AddQuestions1)
+const AddQuestions = connect(null, mapDispatchToProps)(QuestionsToAdd)
 export default AddQuestions;

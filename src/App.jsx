@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo, { ReactComponent } from './logo.svg';
 import './App.css';
 import Parent from './components/Parent.js';
 

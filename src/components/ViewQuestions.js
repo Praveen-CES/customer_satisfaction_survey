@@ -6,64 +6,65 @@ const divStyle = {
   margin: "20px"
 }
 const mapStateToProps = state => {
-  return {questions : state.questions}
+  return { questions: state.questions }
 }
-class ViewQuestions1 extends Component {
+class QuestionsToView extends Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.removeSelectMulti=this.removeSelectMulti.bind(this);
-    this.state = { collapse: false,
-      selectMulti:this.props.questions
+    this.removeSelectMulti = this.removeSelectMulti.bind(this);
+    this.state = {
+      collapse: false,
+      selectMulti: this.props.questions
     };
-   
+
   }
   toggle() {
     this.setState(state => ({ collapse: !state.collapse }));
   }
-  removeSelectMulti(selectedValue){   
- 
-   
-    var selectedValueIndex=this.state.selectMulti.findIndex(k => k.id===selectedValue);
-        var arr=this.props.questions;
-        arr.splice(selectedValueIndex,1)
+  removeSelectMulti(selectedValue) {
+
+
+    var selectedValueIndex = this.state.selectMulti.findIndex(k => k.id === selectedValue);
+    var arr = this.props.questions;
+    arr.splice(selectedValueIndex, 1)
     this.setState({
-      selectMulti:arr
+      selectMulti: arr
     })
   }
-render() {
-  const { selectMulti } = this.state;
+  render() {
+    const { selectMulti } = this.state;
 
-return (
-    
- 
-    <div style={divStyle}>
-   
-      
+    return (
+
+
+      <div style={divStyle}>
+
+
         <FormGroup>
-        <Row className="justify-content-center align-items-center">
-                        <Col lg="10" md="10">
-         
-          {this.state.selectMulti && this.state.selectMulti.map((data)=>     
-          <div style={divStyle}> 
-            
-            <Label className = "mr-4">{data.name}</Label>
-           
-            
-            <Button outline color="danger" type="button" onClick={this.removeSelectMulti.bind(this,data.id)} ><span className="fa fa-trash"></span></Button>
-           
-            </div>
-          )}                     
-         
-          </Col></Row>
+          <Row className="justify-content-center align-items-center">
+            <Col lg="10" md="10">
+
+              {this.state.selectMulti && this.state.selectMulti.map((data) =>
+                <div style={divStyle}>
+
+                  <Label className="mr-4">{data.name}</Label>
+
+
+                  <Button outline color="danger" type="button" onClick={this.removeSelectMulti.bind(this, data.id)} ><span className="fa fa-trash"></span></Button>
+
+                </div>
+              )}
+
+            </Col></Row>
         </FormGroup>
-       
-   
-  </div>
-)
-}
+
+
+      </div>
+    )
+  }
 }
 
-const ViewQuestions = connect (mapStateToProps)(ViewQuestions1);
+const ViewQuestions = connect(mapStateToProps)(QuestionsToView);
 
 export default ViewQuestions;

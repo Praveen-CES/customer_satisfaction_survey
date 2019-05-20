@@ -37,8 +37,9 @@
 }
 .sidebar-list{
   background-color: #fff;
-  height: 100vh;
-  overflow: auto;
   border-right: 1px solid #15467c;
   max-width: 200px !important;
+}
+.no-border{
+  border-radius:0px !important;
 }
