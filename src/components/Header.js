@@ -17,7 +17,7 @@ export default class Header extends Component {
             <img src={logo} class="align-center" allign="middle" />
           </Col>
           <Col xs="12" md="10">
-            <h1 style={{ textAlign: "center" }}>Customer Satisfaction Survey</h1>
+            <h1 style={{ textAlign: "center", paddingRight : "30%" }}>Customer Satisfaction Survey</h1>
           </Col>
         </Row>
 
