@@ -4,7 +4,7 @@ import {
     CardTitle, CardSubtitle, Collapse, Button, Row, Col
 } from 'reactstrap';
 import '../App.css'
-// import { Row } from 'react-strap';
+
 
 const reportsStyle = {
     width: "100%",
@@ -69,8 +69,8 @@ export default class Report extends Component {
                                                 <CardBody style={{ textAlign : "center"}}>
                                                     <CardTitle>Delivery</CardTitle>
                                                     <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
-                                                    <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
-                                                    <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
+                                                    <CardSubtitle>Sample Question 2  ratings</CardSubtitle>
+                                                    <CardSubtitle>Sample Question 3  ratings</CardSubtitle>
                                                     <CardText>Comments</CardText>
                                                 </CardBody>
                                             </Card>
@@ -88,8 +88,8 @@ export default class Report extends Component {
                                             <CardBody style={{ textAlign : "center"}}>
                                                 <CardTitle>Project Governance</CardTitle>
                                                 <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
-                                                <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
-                                                <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
+                                                <CardSubtitle>Sample Question 2  ratings</CardSubtitle>
+                                                <CardSubtitle>Sample Question 3  ratings</CardSubtitle>
                                                 <CardText>Comments</CardText>
                                             </CardBody>
                                         </Card>
@@ -105,8 +105,8 @@ export default class Report extends Component {
                                             <CardBody style={{ textAlign : "center"}}>
                                                 <CardTitle>Communication</CardTitle>
                                                 <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
-                                                <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
-                                                <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
+                                                <CardSubtitle>Sample Question 2  ratings</CardSubtitle>
+                                                <CardSubtitle>Sample Question 3  ratings</CardSubtitle>
                                                 <CardText>Comments</CardText>
                                             </CardBody>
                                         </Card>
@@ -121,8 +121,8 @@ export default class Report extends Component {
                                             <CardBody style={{ textAlign : "center"}}>
                                                 <CardTitle>Work Culture</CardTitle>
                                                 <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
-                                                <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
-                                                <CardSubtitle>Sample Question 1  ratings</CardSubtitle>
+                                                <CardSubtitle>Sample Question 2  ratings</CardSubtitle>
+                                                <CardSubtitle>Sample Question 3  ratings</CardSubtitle>
                                                 <CardText>Comments</CardText>
                                             </CardBody>
                                         </Card>

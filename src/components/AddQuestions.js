@@ -21,8 +21,48 @@ class QuestionsToAdd extends Component {
     super(props);
 
     this.state = {
-      questions: [{ question: "" }]
+      questions: [{ question: "" }],
+      fields : {},
+      errors : {}
     };
+  }
+  handleValidation(){
+
+    
+    let questions = this.state.questions;
+
+    var count=0;
+   questions.map((data)=>{
+     
+     //if
+      //const {name}= data;      
+      //if (data.name.length==0)
+      if(!data.name)
+      count++
+      else if(data.name.trim().length===0)
+      count++
+      else
+      {}
+      //count=count
+      // else if (data.name.length==0)
+      // formIsValid=false;
+    
+
+    })
+     return !(count>0)
+    //let errors = this.state.errors;
+    //let formIsValid = fal
+
+    //add question
+       
+    // if(fields["name"]){
+    //   formIsValid = true;      
+    //   return formIsValid
+    // }
+    // else{
+    //   return formIsValid
+    //   //errors["name"] = "Cannot be empty";
+    // }
   }
 
   onClickPreventDefault(e) {
@@ -30,14 +70,18 @@ class QuestionsToAdd extends Component {
     e.preventDefault();
   }
 
-  handleQuestionNameChange = idx => evt => {
+  handleChange(idx,event) {
+    
+    this.setState({value: event.target.value});
     const newQuestions = this.state.questions.map((question, sidx) => {
       if (idx !== sidx) return question;
-      return { ...question, name: evt.target.value, id: uuidv1() };
+      return { ...question, name: event.target.value, id: uuidv1() };
     });
 
     this.setState({ questions: newQuestions });
-  };
+  }
+
+  
   handleAddQuestion = () => {
     this.setState({
       questions: this.state.questions.concat([{ question: "" }])
@@ -58,8 +102,14 @@ class QuestionsToAdd extends Component {
   handleSubmit = evt => {
     evt.preventDefault();
     const { questions } = this.state;
-
-    this.props.addQuestion({ questions });
+    if(this.handleValidation()){
+      this.props.addQuestion({ questions });
+      alert("Added");
+    }
+    else{
+      alert("Form shouldn't be empty");
+    }
+    
 
   }
   render() {
@@ -72,16 +122,20 @@ class QuestionsToAdd extends Component {
         <Form onSubmit={this.handleSubmit}>
 
           <FormGroup>
-            <h3 for="questions">Add Questions</h3>
-
+            
+          <h3 for="questions">Add Questions</h3>
             {
               this.state.questions.map((question, idx) => {
                 return (
                   <div className="search-qstn" key={idx} style={divStyle}>
+                   
                     <Row>
+                       
                       <Col lg="5" md="5" className="p-0">
                       
-                        <Input type="text" name="questions" id="exampleQuestions" placeholder="Type your question here" value={question.name} onChange={this.handleQuestionNameChange(idx)} />
+                        <Input type="text" name="questions" id="exampleQuestions" placeholder="Type your question here" value={question.name} onChange={this.handleChange.bind(this,idx)}
+                         //onChange={this.handleQuestionNameChange.bind(this,idx)}
+                          />
                       
                       </Col>
                       <Col lg="2" md="2">

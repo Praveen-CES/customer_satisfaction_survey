@@ -43,3 +43,25 @@
 .no-border{
   border-radius:0px !important;
 }
+.picker-panel {
+  z-index: 9999;
+}
+.dash {
+  /* border: 0 none;
+  border-top: 2px  #322f32;
+  background: none;
+  height:0; */
+  /* width:"400"; 
+  style:"border: 2px dashed #C0C0C0" ;
+  color:"#FFFFFF";
+  size : "6"; */
+  margin: "20px";
+  padding: '10px';
+  border: '1px solid #ccc';
+}
+.labelStyle {
+  float : "left";
+  width : "10em";
+  margin-right : "1em";
+  text-align : "right";
+}

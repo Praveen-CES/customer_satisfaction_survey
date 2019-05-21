@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import {  Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import YearPicker from "react-year-picker";
 import Report from "./Report";
 import { Link } from "react-router-dom";
-//import { Form } from 'antd';
+
 const divStyle = {
-  width: "300px",
+  //width: "300px",
   margin: "20px"
 }
 export default class GenerateReport extends Component {
@@ -34,11 +34,11 @@ export default class GenerateReport extends Component {
 
   }
   handleSubmit = evt => {
-    //evt.preventDefault();
+
     console.log("evt", evt);
-    //window.open( "/Report", 'www.google.com');
+
     var href = '/report' + evt;
-    //<a href={href} target = "_blank"/>  
+
 
   }
   render() {
@@ -46,39 +46,63 @@ export default class GenerateReport extends Component {
 
 
       <div style={divStyle}>
-        {/* <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Generate Report</Button>
-        { <Collapse isOpen={this.state.collapse}> */}
 
         <Form>
           <FormGroup>
-            <Label for="exampleSelect">Customer Name</Label>
-            <Input type="select" name="cycle" id="exampleSelect">
-              {this.state.selectCustomer && this.state.selectCustomer.map((data) =>
-                <option>{data}</option>
-              )}
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSelect">Period year</Label>
-            <YearPicker onChange={this.handleChange} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSelect">Cycle</Label>
-            <Input type="select" name="cycle" id="exampleSelect">
-              <option>Quarter 1</option>
-              <option>Quarter 2</option>
-              <option>Quarter 3</option>
-              <option>Quarter 4</option>
-            </Input>
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleSelect">Survey Name</Label>
-            <Input type="select" name="cycle" id="exampleSelect">
-              {this.state.selectSurvey && this.state.selectSurvey.map((data) =>
-                <option>{data}</option>
-              )}
+            <Row>
+              <Col lg="2">
+                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Customer Name : </Label>
+              </Col>
+              <Col lg="10">
+                <Input type="select" name="cycle" id="exampleSelect">
+                  {this.state.selectCustomer && this.state.selectCustomer.map((data) =>
+                    <option>{data}</option>
+                  )}
 
-            </Input>
+                </Input>
+              </Col>
+            </Row>
+          </FormGroup>
+          <FormGroup>
+            <Row>
+              <Col lg="2">
+                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Period year : </Label>
+              </Col>
+              <Col lg="10">
+                <YearPicker onChange={this.handleChange} />
+              </Col>
+            </Row>
+          </FormGroup>
+          <FormGroup>
+            <Row>
+              <Col lg="2">
+                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Cycle : </Label>
+              </Col>
+              <Col lg="10">
+                <Input type="select" name="cycle" id="exampleSelect">
+                  <option>Quarter 1</option>
+                  <option>Quarter 2</option>
+                  <option>Quarter 3</option>
+                  <option>Quarter 4</option>
+                </Input>
+              </Col>
+            </Row>
+
+          </FormGroup>
+          <FormGroup>
+            <Row>
+              <Col lg="2">
+                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Survey Name : </Label>
+              </Col>
+              <Col lg="10">
+                <Input type="select" name="cycle" id="exampleSelect">
+                  {this.state.selectSurvey && this.state.selectSurvey.map((data) =>
+                    <option>{data}</option>
+                  )}
+
+                </Input>
+              </Col>
+            </Row>
           </FormGroup>
           <Button type="button" outline color="primary" onClick={this.toggleReportShown}>Generate Report</Button>{' '}
           {this.state.isReportShown &&
@@ -94,7 +118,7 @@ export default class GenerateReport extends Component {
           }
         </Form>
 
-        {/* </Collapse>} */}
+
       </div>
     )
   }

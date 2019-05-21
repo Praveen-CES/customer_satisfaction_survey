@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Row, Col, Button, FormGroup, Label } from 'reactstrap';
 const divStyle = {
-  width: "300px",
-  margin: "20px"
+  margin: "20px",
+  padding: '10px',
+  border: '1px solid #ccc'
+}
+const fontSize18 = {
+  fontSize: '18px'
 }
 const mapStateToProps = state => {
   return { questions: state.questions }
@@ -38,21 +42,21 @@ class QuestionsToView extends Component {
     return (
 
 
-      <div style={divStyle}>
+      <div className="m-5  border">
 
 
         <FormGroup>
-          <Row className="justify-content-center align-items-center">
-            <Col lg="10" md="10">
+          <Row className=" align-items-center">
+            <Col>
 
-              {this.state.selectMulti && this.state.selectMulti.map((data) =>
+              {this.state.selectMulti && this.state.selectMulti.map((data, ind) =>
                 <div style={divStyle}>
 
-                  <Label className="mr-4">{data.name}</Label>
+                  <Label className="mr-4" style={fontSize18}>{ind + 1}. {data.name}</Label>
 
 
-                  <Button outline color="danger" type="button" onClick={this.removeSelectMulti.bind(this, data.id)} ><span className="fa fa-trash"></span></Button>
-
+                  <Button outline color="danger" className="float-right" type="button" onClick={this.removeSelectMulti.bind(this, data.id)} ><span className="fa fa-trash"></span></Button>
+                  <div class="hr-line-dashed"></div>
                 </div>
               )}
 
