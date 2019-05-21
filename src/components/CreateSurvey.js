@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import YearPicker from "react-year-picker";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import classNames from 'classnames';
 import "../App.css"
 const divStyle = {
@@ -10,7 +11,24 @@ const divStyle = {
   // padding: '10px',
   // border: '1px solid #ccc'
 }
-
+const labelStyle = {
+  float:"right",
+  fontWeight:"bold",
+  paddingTop : "5px"
+}
+const linkStyles ={
+  
+  //padding: "250px",
+  // paddingTop : "1px"
+  paddingLeft : "600px"
+}
+const buttonStyle = {
+  display: 'flex', 
+  // justifyContent: 'center',
+  width:"50%",
+  paddingLeft : "400px"  
+  
+}
 const mapStateToProps = state => {
   return { questions: state.questions }
 }
@@ -20,7 +38,7 @@ class SurveyToBeCreated extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       collapse: false,
-      selectMulti: this.props.questions
+      selectMultiQuestions: this.props.questions
 
     };
     this.handleChange = this.handleChange.bind(this);
@@ -38,7 +56,7 @@ class SurveyToBeCreated extends Component {
 
   }
   render() {
-    const { selectMulti } = this.state;
+    const { selectMultiQuestions } = this.state;
     return (
 
 
@@ -50,7 +68,7 @@ class SurveyToBeCreated extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}} for="exampleSelect">Survey Name : </Label>
+                <Label style={labelStyle} for="exampleSelect">Survey Name : </Label>
               </Col>
               <Col lg="10">
                 <Input type="text" name="survey" id="exampleSurvey" placeholder="Type your survey name here" />
@@ -61,7 +79,7 @@ class SurveyToBeCreated extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Customer Name : </Label>
+                <Label style={labelStyle}  for="exampleSelect">Customer Name : </Label>
               </Col>
               <Col lg="10">
                 <Input type="text" name="customer" id="exampleCustomer" placeholder="Type your customer name here" />
@@ -72,7 +90,7 @@ class SurveyToBeCreated extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Period year : </Label>
+                <Label style={labelStyle}  for="exampleSelect">Period year : </Label>
               </Col>
               <Col lg="10">
                 <YearPicker onChange={this.handleChange} />
@@ -83,7 +101,7 @@ class SurveyToBeCreated extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Cycle : </Label>
+                <Label style={labelStyle}  for="exampleSelect">Cycle : </Label>
               </Col>
               <Col lg="10">
                 <Input type="select" name="cycle" id="exampleSelect">
@@ -99,7 +117,7 @@ class SurveyToBeCreated extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleEmail">To Address : </Label>
+                <Label style={labelStyle}  for="exampleEmail">To Address : </Label>
               </Col>
               <Col lg="10">
                 <Input type="email" name="email" id="exampleEmail" placeholder="Type recipients email address" />
@@ -110,7 +128,7 @@ class SurveyToBeCreated extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleEmail">CC : </Label>
+                <Label style={labelStyle}  for="exampleEmail">CC : </Label>
               </Col>
               <Col lg="10">
                 <Input type="email" name="email" id="exampleEmail" placeholder="Type CC email recipients" />
@@ -121,7 +139,7 @@ class SurveyToBeCreated extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleEmail">BCC : </Label>
+                <Label style={labelStyle}  for="exampleEmail">BCC : </Label>
               </Col>
               <Col lg="10">
                 <Input type="email" name="email" id="exampleEmail" placeholder="Type BCC email recipients" />
@@ -132,12 +150,12 @@ class SurveyToBeCreated extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleText">Select Questions : </Label>
+                <Label style={labelStyle}  for="exampleText">Select Questions : </Label>
               </Col>
               <Col lg="10">
                 <FormGroup check>
 
-                  {this.state.selectMulti && this.state.selectMulti.map((data) =>
+                  {this.state.selectMultiQuestions && this.state.selectMultiQuestions.map((data) =>
                     <div>
 
                       <Label check>
@@ -147,16 +165,18 @@ class SurveyToBeCreated extends Component {
 
                     </div>
                   )}
+                  
                 </FormGroup>
               </Col>
+              
             </Row>
-
+            
 
           </FormGroup>
-
+          <div style={buttonStyle}>
 
           <Button type="button" outline color="primary" onClick={(e) => { this.handleSubmit(e) }}>Create Survey</Button>{' '}
-
+          </div>
         </Form>
 
 

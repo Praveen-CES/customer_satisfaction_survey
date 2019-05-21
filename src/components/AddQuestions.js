@@ -14,7 +14,10 @@ const divStyle = {
   margin: "20px"
 }
 const buttonStyle = {
-  "float": 'left '
+  display: 'flex', 
+  // justifyContent: 'center',
+  width:"50%",
+  paddingLeft : "150px"
 }
 class QuestionsToAdd extends Component {
   constructor(props) {
@@ -149,7 +152,7 @@ class QuestionsToAdd extends Component {
             <Row>
               <Col lg="10" md="10">
                 <div style={buttonStyle}>
-                  <Button type="button" outline color="primary" className="mt-2" onClick={this.handleAddQuestion}>Add Question</Button>
+                  <Button style = {{display:"flex" }}type="button" outline color="primary" className="mt-2" onClick={this.handleAddQuestion}>Add Question</Button>
                 </div>
               </Col>
             </Row>

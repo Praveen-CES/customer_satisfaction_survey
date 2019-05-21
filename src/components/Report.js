@@ -52,7 +52,7 @@ export default class Report extends Component {
 
             <div>
                 <div className="text-center">
-                    <h1 className="justify-contenet-center allign-items-center" style={{ textAllign: "center" }}>CustomerName-ProjectName-CustomerSatisfactionSurvey</h1>
+                    <h2 className="justify-contenet-center allign-items-center" style={{ textAllign: "center" }}>CustomerName-ProjectName-CustomerSatisfactionSurvey</h2>
                     <h2 style={{ textAllign: "center" }}>Quarter</h2>
                     <h2 style={{ textAllign: "center" }}>Total</h2>
                 </div>

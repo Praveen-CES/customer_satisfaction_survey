@@ -6,7 +6,21 @@ import { Link } from "react-router-dom";
 
 const divStyle = {
   //width: "300px",
-  margin: "20px"
+  margin: "20px",
+  
+}
+const labelStyle = {
+  float:"right",
+  fontWeight:"bold",
+  paddingTop: "5px"
+}
+const buttonStyle = {
+  display: 'flex', 
+  // justifyContent: 'center',
+  width:"50%",
+  paddingLeft : "400px",
+   
+  
 }
 export default class GenerateReport extends Component {
   constructor(props) {
@@ -51,7 +65,7 @@ export default class GenerateReport extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Customer Name : </Label>
+                <Label style={labelStyle}  for="exampleSelect">Customer Name : </Label>
               </Col>
               <Col lg="10">
                 <Input type="select" name="cycle" id="exampleSelect">
@@ -66,7 +80,7 @@ export default class GenerateReport extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Period year : </Label>
+                <Label style={labelStyle}  for="exampleSelect">Period year : </Label>
               </Col>
               <Col lg="10">
                 <YearPicker onChange={this.handleChange} />
@@ -76,7 +90,7 @@ export default class GenerateReport extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Cycle : </Label>
+                <Label style={labelStyle}  for="exampleSelect">Cycle : </Label>
               </Col>
               <Col lg="10">
                 <Input type="select" name="cycle" id="exampleSelect">
@@ -92,7 +106,7 @@ export default class GenerateReport extends Component {
           <FormGroup>
             <Row>
               <Col lg="2">
-                <Label style={{float:"right",fontWeight:"bold"}}  for="exampleSelect">Survey Name : </Label>
+                <Label style={labelStyle}  for="exampleSelect">Survey Name : </Label>
               </Col>
               <Col lg="10">
                 <Input type="select" name="cycle" id="exampleSelect">
@@ -104,17 +118,23 @@ export default class GenerateReport extends Component {
               </Col>
             </Row>
           </FormGroup>
-          <Button type="button" outline color="primary" onClick={this.toggleReportShown}>Generate Report</Button>{' '}
+          <div style = {buttonStyle}>
+          <Button type="button" outline color="primary" onClick={this.toggleReportShown}>View Results</Button>{' '}
+          </div>
           {this.state.isReportShown &&
             <FormGroup>
+              
               <div style={divStyle}>
                 <Label>Customer Satisfactory Percentage : </Label>
               </div>
               <div style={divStyle}>
+            
                 <Button type="button" outline color="primary" onClick={(e) => this.handleSubmit(e)}><Link target="_blank" to="/Report" >View Report</Link></Button>{' '}
+              
               </div>
+              
             </FormGroup>
-
+            
           }
         </Form>
 

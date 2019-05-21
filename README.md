@@ -1,11 +1,12 @@
 Add Questions : Able to add single/multiple questions, will fail if the text box is empty.
 
-View Questions : Able to view the list of added questions and has an option to delete it.
+View Questions : Able to view the list of added questions and an link to add questions and has an option to delete it.
 
 Create Survey : Able to add the survey name, customer name, year, email address to generate a survey which will be sent as an email link to the customers.
 
 Generate Report : Able to generate the report from the submitted survey. When clicked on generate report a button to view report will be enabled and clicking on it will open a new tab and shows the result.
 
+View report : Need to click on the collapsible panel to know the results and ratings.
 
 
 
