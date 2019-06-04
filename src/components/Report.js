@@ -24,11 +24,11 @@ export default class Report extends Component {
         this.toggleWorkculture = this.toggleWorkculture.bind(this);
         this.toggleComments = this.toggleComments.bind(this);
         this.state = {
-            collapseProjectGovernance: false,
-            collapseDelivery: false,
-            collapseCommunication: false,
-            collapseWorkculture: false,
-            collapseComments: false
+            collapseProjectGovernance: true,
+            collapseDelivery: true,
+            collapseCommunication: true,
+            collapseWorkculture: true,
+            collapseComments: true
         };
     }
 

@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { Row, Col,Container } from 'reactstrap'
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import AddQuestions from './AddQuestions.js';
+
+import Header from './Header.js';
+import Sidebar from './Sidebar.js';
+import AddQuestions from './AddQuestions';
 import ViewQuestions from './ViewQuestions';
 import CreateSurvey from './CreateSurvey';
 import GenerateReport from './GenerateReport';
-import Header from './Header.js';
-import Sidebar from './Sidebar.js';
 import Report from './Report';
-
+import  Questionnaire  from "./Questionnaire";
+import Login from "./Login";
 const routes = [
   {
     path: "/AddQuestions",
@@ -30,8 +32,17 @@ const routes = [
   {
     path: "/Report",
     main: () => <Report />
+  },
+  {
+    path: "/Questionnaire",
+    main: () => <Questionnaire />
+  },
+  {
+    path: "/Login",
+    main: () => <Login />
   }
 ];
+
 
 export default class Parent extends Component {
 
