@@ -4,6 +4,7 @@ import YearPicker from "react-year-picker";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import classNames from 'classnames';
+import axios from 'axios';
 import "../App.css"
 const divStyle = {
   //width: "300px",
@@ -38,14 +39,24 @@ class SurveyToBeCreated extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       collapse: false,
-      selectMultiQuestions: this.props.questions
-
+      selectMultiQuestions: this.props.questions,
+      client:[]
     };
     this.handleChange = this.handleChange.bind(this);
 
 
   }
-  toggle() {
+
+componentDidMount(){
+axios.get('http://localhost:3000/getMetaData').then(res=> {
+  console.log(res.data.client);
+  
+  this.setState({client : res.data.client})
+
+})
+}
+
+toggle() {
     this.setState(state => ({ collapse: !state.collapse }));
   }
   handleChange(date) {
@@ -178,8 +189,6 @@ class SurveyToBeCreated extends Component {
           <Button type="button" outline color="primary" onClick={(e) => { this.handleSubmit(e) }}>Create Survey</Button>{' '}
           </div>
         </Form>
-
-
       </div>
     )
   }

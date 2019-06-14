@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input, Row, Col } from 'reactstrap';
 import YearPicker from "react-year-picker";
 import Report from "./Report";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const divStyle = {
   //width: "300px",
@@ -32,9 +33,18 @@ export default class GenerateReport extends Component {
       dropdownOpen: false,
       isReportShown: false,
       selectCustomer: ["Sample Customer 1", "Sample Customer 2", "Sample Customer 3", "Sample Customer 4"],
-      selectSurvey: ["Sample Survey 1", "Sample Survey 2", "Sample Survey 3", "Sample Survey 4"]
+      selectSurvey: ["Sample Survey 1", "Sample Survey 2", "Sample Survey 3", "Sample Survey 4"],
+      client: []
     };
   }
+  componentDidMount(){
+    axios.get('http://localhost:3000/getMetaData').then(res=> {
+      console.log(res.data.client);
+      
+      this.setState({client : res.data.client})
+    
+    })
+    }
   toggle() {
     this.setState(state => ({
       collapse: !state.collapse
