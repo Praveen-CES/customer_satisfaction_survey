@@ -25,6 +25,9 @@ export default class Sidebar extends Component {
             <NavLink href="#"><Link to="/ViewQuestions" >ViewQuestions</Link></NavLink>
           </NavItem>
           <NavItem>
+            <NavLink href="#"><Link to="/Template" >ViewDefaultTemplate</Link></NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink href="#"><Link to="/Createsurvey" >Createsurvey</Link></NavLink>
           </NavItem>
           <NavItem>

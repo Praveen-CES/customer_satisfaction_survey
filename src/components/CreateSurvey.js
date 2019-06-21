@@ -40,9 +40,20 @@ class SurveyToBeCreated extends Component {
     this.state = {
       collapse: false,
       selectMultiQuestions: this.props.questions,
-      client:[]
+      client:[],
+      project:[],
+      exampleSurvey:"",
+      exampleProject: "",
+      examplePassword: "",
+      exampleCustomer: "",
+      exampleYear: ""      
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleExampleSurveyChange=this.handleExampleSurveyChange.bind(this);
+    this.handleExampleProjectChange = this.handleExampleProjectChange.bind(this);
+    this.handleExamplePasswordChange = this.handleExamplePasswordChange.bind(this);
+    this.handlExampleCustomerChange = this.handleExampleCustomerChange.bind(this);
+    this.onSelectClient=this.onSelectClient.bind(this);
 
 
   }
@@ -50,9 +61,9 @@ class SurveyToBeCreated extends Component {
 componentDidMount(){
 axios.get('http://localhost:3000/getMetaData').then(res=> {
   console.log(res.data.client);
-  
-  this.setState({client : res.data.client})
-
+  this.setState({client : res.data.client,
+    exampleCustomer:res.data.client[0].client_name
+  })
 })
 }
 
@@ -61,9 +72,68 @@ toggle() {
   }
   handleChange(date) {
 
+this.setState({
+  exampleYear:date
+})
+  }
+  handleExampleSurveyChange(evt){
+    this.setState({exampleSurvey :  evt.target.value})
+  }
+  handleExampleProjectChange(evt){
+    this.setState({exampleProject :  evt.target.value})
+  }
+  handleExamplePasswordChange(evt){
+    this.setState({examplePassword:  evt.target.value})
+  }
+  handleExampleCustomerChange(evt){
+    this.setState({exampleCustomer: evt.target.value})
+  }
+  onSelectClient(data){
+        
+    const index=data.target.selectedIndex;
+    const projectval=this.state.client[index].project
+this.setState({
+  project:projectval,
+  exampleCustomer:data.target.value,
+  exampleProject:data.target.value
+})
   }
   handleSubmit = evt => {
-    const { data } = this.state;
+    
+    console.log(this.state.exampleSurvey)
+    console.log(this.state.examplePassword)
+    console.log("project",this.state.exampleProject)
+    console.log("customer", this.state.exampleCustomer)
+    console.log("Year", this.state.exampleYear)
+    evt.preventDefault();
+    // let data = {
+    //   "survey_name" : this.state.exampleSurvey,
+    //   "project_id": "1331",
+    //   "project_name" : this.state.exampleProject,
+    //   "client_id": "12424",
+    //   "client_name": this.state.exampleCustomer,
+    //   "survey_password": this.state.examplePassword
+    // }
+      
+    axios.post('http://localhost:3000/createSurvey', {
+      "survey_name" : this.state.exampleSurvey,
+      "project_id": "1331",
+      "project_name" : this.state.exampleProject,
+      "client_id": "12424",
+      "client_name": this.state.exampleCustomer,
+      "survey_password": this.state.examplePassword,
+      "template_id": "123s"
+    }).then((res)=> {
+      let resp = JSON.parse(res.request.response);
+      let survey_id = resp.survey_id;
+      console.log("survey_id", survey_id);
+     let SurveyLink = "http://localhost:3000/questionnaire/"+survey_id;
+     let SurveyPassword = resp.survey_password;
+     let output = ("Survey Link   "+SurveyLink).concat("\n Survey Password   "+ SurveyPassword)
+alert(output)
+      
+      
+    })
 
   }
   render() {
@@ -74,7 +144,7 @@ toggle() {
       <div style={divStyle}>
 
 
-        <Form>
+        <Form >
 
           <FormGroup>
             <Row>
@@ -82,18 +152,48 @@ toggle() {
                 <Label style={labelStyle} for="exampleSelect">Survey Name : </Label>
               </Col>
               <Col lg="10">
-                <Input type="text" name="survey" id="exampleSurvey" placeholder="Type your survey name here" />
+                <Input value={this.state.exampleSurvey} onChange={this.handleExampleSurveyChange} type="text" name="survey" id="exampleSurvey" placeholder="Type your survey name here" />
               </Col>
             </Row>
           </FormGroup>
 
-          <FormGroup>
+          {/* <FormGroup>
             <Row>
               <Col lg="2">
                 <Label style={labelStyle}  for="exampleSelect">Customer Name : </Label>
               </Col>
               <Col lg="10">
                 <Input type="text" name="customer" id="exampleCustomer" placeholder="Type your customer name here" />
+              </Col>
+            </Row>
+          </FormGroup> */}
+          <FormGroup>
+            <Row>
+              <Col lg="2">
+                <Label style={labelStyle}  for="exampleSelect">Customer Name : </Label>
+              </Col>
+              <Col lg="10">
+                <Input onChange={this.onSelectClient} type="select" name="cycle" id="exampleSelect">
+                  {this.state.client && this.state.client.map((data) =>
+                    <option >{data.client_name}</option>
+                  )}
+
+                </Input>
+              </Col>
+            </Row>
+          </FormGroup>
+          <FormGroup>
+            <Row>
+              <Col lg="2">
+                <Label style={labelStyle}  for="exampleSelect">Project Name : </Label>
+              </Col>
+              <Col lg="10">
+                <Input onChange={this.onSelectClient} type="select" name="cycle" id="exampleSelect">
+                  {this.state.client && this.state.project.map((project) =>
+                    <option value={this.state.exampleProject} >{project.project_name}</option>
+                  )}
+
+                </Input>
               </Col>
             </Row>
           </FormGroup>
@@ -124,8 +224,18 @@ toggle() {
               </Col>
             </Row>
           </FormGroup>
-
           <FormGroup>
+            <Row>
+              <Col lg="2">
+                <Label style={labelStyle}  for="exampleSelect">Survey Password : </Label>
+              </Col>
+              <Col lg="10">
+                <Input value={this.state.examplePassword} onChange={this.handleExamplePasswordChange} type="text" name="surveyPassword" id="exampleCustomer" placeholder="Type the survey password here" />
+              </Col>
+            </Row>
+          </FormGroup>
+
+          {/* <FormGroup>
             <Row>
               <Col lg="2">
                 <Label style={labelStyle}  for="exampleEmail">To Address : </Label>
@@ -134,9 +244,9 @@ toggle() {
                 <Input type="email" name="email" id="exampleEmail" placeholder="Type recipients email address" />
               </Col>
             </Row>
-          </FormGroup>
+          </FormGroup> */}
 
-          <FormGroup>
+          {/* <FormGroup>
             <Row>
               <Col lg="2">
                 <Label style={labelStyle}  for="exampleEmail">CC : </Label>
@@ -145,9 +255,9 @@ toggle() {
                 <Input type="email" name="email" id="exampleEmail" placeholder="Type CC email recipients" />
               </Col>
             </Row>
-          </FormGroup>
+          </FormGroup> */}
 
-          <FormGroup>
+          {/* <FormGroup>
             <Row>
               <Col lg="2">
                 <Label style={labelStyle}  for="exampleEmail">BCC : </Label>
@@ -156,9 +266,9 @@ toggle() {
                 <Input type="email" name="email" id="exampleEmail" placeholder="Type BCC email recipients" />
               </Col>
             </Row>
-          </FormGroup>
+          </FormGroup> */}
 
-          <FormGroup>
+          {/* <FormGroup>
             <Row>
               <Col lg="2">
                 <Label style={labelStyle}  for="exampleText">Select Questions : </Label>
@@ -183,10 +293,10 @@ toggle() {
             </Row>
             
 
-          </FormGroup>
+          </FormGroup> */}
           <div style={buttonStyle}>
 
-          <Button type="button" outline color="primary" onClick={(e) => { this.handleSubmit(e) }}>Create Survey</Button>{' '}
+          <Button type="button" outline color="primary" onClick={this.handleSubmit}>Create Survey</Button>{' '}
           </div>
         </Form>
       </div>

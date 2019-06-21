@@ -34,15 +34,16 @@ export default class GenerateReport extends Component {
       isReportShown: false,
       selectCustomer: ["Sample Customer 1", "Sample Customer 2", "Sample Customer 3", "Sample Customer 4"],
       selectSurvey: ["Sample Survey 1", "Sample Survey 2", "Sample Survey 3", "Sample Survey 4"],
-      client: []
+      client: [],
+      selectedClientName: "",
+      project: []
     };
+    this.onSelectClient=this.onSelectClient.bind(this);
   }
   componentDidMount(){
     axios.get('http://localhost:3000/getMetaData').then(res=> {
-      console.log(res.data.client);
-      
-      this.setState({client : res.data.client})
-    
+      console.log("metadata",res.data.client);
+      this.setState({client : res.data.client});
     })
     }
   toggle() {
@@ -56,6 +57,13 @@ export default class GenerateReport extends Component {
       isReportShown: !this.state.isReportShown
     });
 
+  }
+  onSelectClient(data){
+    const index=data.target.selectedIndex;
+    const projectval=this.state.client[index].project
+this.setState({
+  project:projectval
+})
   }
   handleSubmit = evt => {
 
@@ -78,9 +86,24 @@ export default class GenerateReport extends Component {
                 <Label style={labelStyle}  for="exampleSelect">Customer Name : </Label>
               </Col>
               <Col lg="10">
+                <Input onChange={this.onSelectClient} type="select" name="cycle" id="exampleSelect">
+                  {this.state.client && this.state.client.map((data) =>
+                    <option>{data.client_name}</option>
+                  )}
+
+                </Input>
+              </Col>
+            </Row>
+          </FormGroup>
+          <FormGroup>
+            <Row>
+              <Col lg="2">
+                <Label style={labelStyle}  for="exampleSelect">Project Name : </Label>
+              </Col>
+              <Col lg="10">
                 <Input type="select" name="cycle" id="exampleSelect">
-                  {this.state.selectCustomer && this.state.selectCustomer.map((data) =>
-                    <option>{data}</option>
+                  {this.state.client && this.state.project.map((project) =>
+                    <option>{project.project_name}</option>
                   )}
 
                 </Input>
@@ -113,21 +136,7 @@ export default class GenerateReport extends Component {
             </Row>
 
           </FormGroup>
-          <FormGroup>
-            <Row>
-              <Col lg="2">
-                <Label style={labelStyle}  for="exampleSelect">Survey Name : </Label>
-              </Col>
-              <Col lg="10">
-                <Input type="select" name="cycle" id="exampleSelect">
-                  {this.state.selectSurvey && this.state.selectSurvey.map((data) =>
-                    <option>{data}</option>
-                  )}
-
-                </Input>
-              </Col>
-            </Row>
-          </FormGroup>
+          
           <div style = {buttonStyle}>
           <Button type="button" outline color="primary" onClick={this.toggleReportShown}>View Results</Button>{' '}
           </div>

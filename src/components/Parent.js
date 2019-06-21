@@ -11,6 +11,7 @@ import GenerateReport from './GenerateReport';
 import Report from './Report';
 import  Questionnaire  from "./Questionnaire";
 import Login from "./Login";
+import ViewTemplate from "./ViewTemplate";
 const routes = [
   {
     path: "/AddQuestions",
@@ -34,12 +35,16 @@ const routes = [
     main: () => <Report />
   },
   {
-    path: "/Questionnaire",
+    path: "/Questionnaire/:survey_id",
     main: () => <Questionnaire />
   },
   {
     path: "/Login",
     main: () => <Login />
+  },
+  {
+    path: "/Template",
+    main: () => <ViewTemplate />
   }
 ];
 

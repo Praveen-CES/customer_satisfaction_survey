@@ -4,7 +4,7 @@ import {
     CardTitle, CardSubtitle, Collapse, Button, Row, Col
 } from 'reactstrap';
 import '../App.css'
-
+import axios from 'axios'
 
 const reportsStyle = {
     width: "100%",
@@ -28,7 +28,8 @@ export default class Report extends Component {
             collapseDelivery: true,
             collapseCommunication: true,
             collapseWorkculture: true,
-            collapseComments: true
+            collapseComments: true,
+            results: []
         };
     }
 
@@ -46,6 +47,13 @@ export default class Report extends Component {
     }
     toggleComments() {
         this.setState(state => ({ collapseComments: !state.collapseComments }));
+    }
+    componentDidMount(){
+        axios.get('http://localhost:3000/getSurvey').then((res)=> {
+            console.log("res", res);
+            this.setState({results : res.data})
+        })
+
     }
     render() {
         return (
