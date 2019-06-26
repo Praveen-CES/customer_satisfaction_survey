@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Collapse, Button, Row, Col
@@ -15,9 +16,11 @@ const reportsStyle = {
 
 }
 
-export default class Report extends Component {
+class Report extends Component {
     constructor(props) {
         super(props);
+        debugger
+    console.log("constructor",this.props);
         this.toggleDelivery = this.toggleDelivery.bind(this);
         this.toggleProjectGovernance = this.toggleProjectGovernance.bind(this);
         this.toggleCommunication = this.toggleCommunication.bind(this);
@@ -49,9 +52,14 @@ export default class Report extends Component {
         this.setState(state => ({ collapseComments: !state.collapseComments }));
     }
     componentDidMount(){
-        axios.get('http://localhost:3000/getSurvey').then((res)=> {
+debugger
+        axios.get('http://localhost:3000/getMetaData').then((res)=> {
             console.log("res", res);
             this.setState({results : res.data})
+        })
+        axios.get('http://localhost:3000/getTemplate').then((res)=> {
+            console.log("metadata", res);
+
         })
 
     }
@@ -160,3 +168,5 @@ export default class Report extends Component {
         )
     }
 }
+
+export default withRouter(Report);

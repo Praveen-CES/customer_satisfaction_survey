@@ -46,7 +46,10 @@ class SurveyToBeCreated extends Component {
       exampleProject: "",
       examplePassword: "",
       exampleCustomer: "",
-      exampleYear: ""      
+      exampleYear: "",
+      exampleQuarter: "",
+      displayOutput : null ,
+      surveyPassword : ""     
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleExampleSurveyChange=this.handleExampleSurveyChange.bind(this);
@@ -54,6 +57,9 @@ class SurveyToBeCreated extends Component {
     this.handleExamplePasswordChange = this.handleExamplePasswordChange.bind(this);
     this.handlExampleCustomerChange = this.handleExampleCustomerChange.bind(this);
     this.onSelectClient=this.onSelectClient.bind(this);
+    this.onSelectProject = this.onSelectProject.bind(this);
+    this.onSelectYear = this.onSelectYear.bind(this);
+    this.onSelectQuarter = this.onSelectQuarter.bind(this);
 
 
   }
@@ -62,7 +68,9 @@ componentDidMount(){
 axios.get('http://localhost:3000/getMetaData').then(res=> {
   console.log(res.data.client);
   this.setState({client : res.data.client,
-    exampleCustomer:res.data.client[0].client_name
+    exampleCustomer:res.data.client[0].client_name,
+    //exampleProject: res.data.client[0].project[0].project_name,
+    project : res.data.client[0].project
   })
 })
 }
@@ -92,11 +100,22 @@ this.setState({
         
     const index=data.target.selectedIndex;
     const projectval=this.state.client[index].project
+    
 this.setState({
   project:projectval,
   exampleCustomer:data.target.value,
-  exampleProject:data.target.value
+ //exampleProject :data.target.value
 })
+  }
+  onSelectProject(data){
+    
+    this.setState({exampleProject: data.target.value})
+  }
+  onSelectQuarter(data){
+    this.setState({exampleQuarter: data.target.value})
+  }
+  onSelectYear(data){
+    this.setState({exampleYear : data.target.value})
   }
   handleSubmit = evt => {
     
@@ -116,6 +135,7 @@ this.setState({
     // }
       
     axios.post('http://localhost:3000/createSurvey', {
+      "survey_id": this.state.exampleCustomer.replace(/\s/g,'') + "_" + this.state.exampleProject.replace(/\s/g,'') + "_" + this.state.exampleYear + "_" + this.state.exampleQuarter,
       "survey_name" : this.state.exampleSurvey,
       "project_id": "1331",
       "project_name" : this.state.exampleProject,
@@ -127,12 +147,14 @@ this.setState({
       let resp = JSON.parse(res.request.response);
       let survey_id = resp.survey_id;
       console.log("survey_id", survey_id);
-     let SurveyLink = "http://localhost:3000/questionnaire/"+survey_id;
+     let SurveyLink = "http://localhost:3001/questionnaire?survey_id="+survey_id;
      let SurveyPassword = resp.survey_password;
-     let output = ("Survey Link   "+SurveyLink).concat("\n Survey Password   "+ SurveyPassword)
-alert(output)
-      
-      
+     let output = "Survey Link   "+SurveyLink
+     console.log(output);
+     this.setState({displayOutput : output,
+    surveyPassword : "Survey Password : "+ this.state.examplePassword})
+     
+//alert(output)
     })
 
   }
@@ -188,9 +210,9 @@ alert(output)
                 <Label style={labelStyle}  for="exampleSelect">Project Name : </Label>
               </Col>
               <Col lg="10">
-                <Input onChange={this.onSelectClient} type="select" name="cycle" id="exampleSelect">
+                <Input onChange={this.onSelectProject} name="cycle" type="select" id="exampleSelect">
                   {this.state.client && this.state.project.map((project) =>
-                    <option value={this.state.exampleProject} >{project.project_name}</option>
+                    <option  >{project.project_name}</option>
                   )}
 
                 </Input>
@@ -215,11 +237,11 @@ alert(output)
                 <Label style={labelStyle}  for="exampleSelect">Cycle : </Label>
               </Col>
               <Col lg="10">
-                <Input type="select" name="cycle" id="exampleSelect">
-                  <option>Quarter 1</option>
-                  <option>Quarter 2</option>
-                  <option>Quarter 3</option>
-                  <option>Quarter 4</option>
+                <Input onChange={this.onSelectQuarter} type="select" name="cycle" id="exampleSelect">
+                  <option>Quarter-1</option>
+                  <option>Quarter-2</option>
+                  <option>Quarter-3</option>
+                  <option>Quarter-4</option>
                 </Input>
               </Col>
             </Row>
@@ -299,7 +321,14 @@ alert(output)
           <Button type="button" outline color="primary" onClick={this.handleSubmit}>Create Survey</Button>{' '}
           </div>
         </Form>
+        {this.state.displayOutput !=null && 
+        <div>
+        <Label>{this.state.displayOutput}</Label>
+        <Label>{this.state.surveyPassword}</Label>
       </div>
+      }
+      </div>
+     
     )
   }
 }

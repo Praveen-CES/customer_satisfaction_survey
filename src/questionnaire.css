@@ -35,8 +35,34 @@
 		}
 	}
 } */
-
 .happySmileys {
     /* background: url('https://res.cloudinary.com/turdlife/image/upload/v1492864443/happy_ampvnc.svg') center; */
     background-size: cover;
 } 
+.question{
+	background: #fff;
+    margin: 10px 0px;
+}
+.question:hover{
+	box-shadow: 2px 5px 10px #333;
+}
+.question-content{
+	font-size: 17px;
+    font-weight: 600;
+    color: #333;
+}
+.question-option{
+	position: relative;
+}
+.question-option input{
+	width: 30px;
+    height: 30px;
+    opacity: 0;
+    z-index: 999;
+}
+.question-option span.fa{
+	cursor: pointer;
+}
+.question-option span.fa:hover,.selectedStar{
+	color: gold;
+}
