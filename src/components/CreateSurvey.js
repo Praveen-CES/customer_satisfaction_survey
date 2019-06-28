@@ -137,12 +137,11 @@ this.setState({
     axios.post('http://localhost:3000/createSurvey', {
       "survey_id": this.state.exampleCustomer.replace(/\s/g,'') + "_" + this.state.exampleProject.replace(/\s/g,'') + "_" + this.state.exampleYear + "_" + this.state.exampleQuarter,
       "survey_name" : this.state.exampleSurvey,
-      "project_id": "1331",
       "project_name" : this.state.exampleProject,
-      "client_id": "12424",
       "client_name": this.state.exampleCustomer,
       "survey_password": this.state.examplePassword,
-      "template_id": "123s"
+      "year": this.state.exampleYear,
+      "quarter": this.state.exampleQuarter
     }).then((res)=> {
       let resp = JSON.parse(res.request.response);
       let survey_id = resp.survey_id;

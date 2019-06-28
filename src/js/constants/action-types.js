@@ -1,1 +1,2 @@
 export const ADD_QUESTION = "ADD_QUESTION";
+export const GENERATE_REPORT = "GENERATE_REPORT";

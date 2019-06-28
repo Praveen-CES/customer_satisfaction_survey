@@ -5,7 +5,15 @@ import YearPicker from "react-year-picker";
 import Report from "./Report";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import { reverse } from 'dns';
+import { func } from 'prop-types';
+import { connect } from 'react-redux';
+import { generateReport } from "../js/actions/index";
+function mapDispatchToProps(dispatch){
+return {
+  generateReport : response => dispatch(generateReport(response))
+}
+}
 const divStyle = {
   //width: "300px",
   margin: "20px",
@@ -26,7 +34,7 @@ const buttonStyle = {
 }
 
 
- class GenerateReport extends Component {
+ class ReportToGenerate extends Component {
   constructor(props) {
     super(props);    
     this.toggle = this.toggle.bind(this);
@@ -54,7 +62,7 @@ const buttonStyle = {
     this.onSelectProject = this.onSelectProject.bind(this);
     this.onSelectYear = this.onSelectYear.bind(this);
     this.onSelectQuarter = this.onSelectQuarter.bind(this);
-    this.href = this.props.history.createHref('/Report');
+    //this.href = this.props.history.createHref('/Report');
   }  
   componentDidMount(){
     axios.get('http://localhost:3000/getMetaData').then(res=> {
@@ -89,14 +97,19 @@ const buttonStyle = {
       // for (let rate in res.data.survey_ratings){
       //   console.log("rate",rate.answer)
       // }
-      if(res.status == 200){
+      if(res.status == 200 && res.data.isSurveyTakenByCustomer == true){
       let finalscore = parseInt(res.data.survey_ratings[0].answer)+parseInt(res.data.survey_ratings[1].answer)+parseInt(res.data.survey_ratings[2].answer)+parseInt(res.data.survey_ratings[3].answer)+parseInt(res.data.survey_ratings[4].answer)+parseInt(res.data.survey_ratings[5].answer)+parseInt(res.data.survey_ratings[6].answer)+parseInt(res.data.survey_ratings[7].answer)+parseInt(res.data.survey_ratings[8].answer)+parseInt(res.data.survey_ratings[9].answer)+parseInt(res.data.survey_ratings[10].answer);
       console.log("score", finalscore);
       this.setState({score:finalscore});
-      this.setState({response: res.data})
+      this.setState({response: res.data});
+      this.props.generateReport(res.data)
+      localStorage.clear();
+      
+      localStorage.setItem("res", JSON.stringify(res.data));
+      localStorage.setItem("score", finalscore);
       }
     })
-
+  
   }
   onSelectClient(data){
     const index=data.target.selectedIndex;
@@ -107,7 +120,7 @@ this.setState({
 })
   }
   handleChange(date) {
-
+    
     this.setState({
       exampleYear:date
     })
@@ -212,11 +225,12 @@ this.setState({
             
                 <Button type="button" outline color="primary">
                 
-                {/* <Link target="_blank" to={{
+                <Link target="_blank" to={{
                   pathname: "/Report",
-                  state: { fromDashboard: true }}} >View Report</Link> */}
+                  state: { resp: this.state.response }}} >View Report</Link>
                   
-    <a href={this.href} target="_blank">View Report</a>
+    {/* <a href = "/Report"target="_blank" state = { this.state.response}>View Report</a> */}
+    
 
                   </Button>{' '}
               
@@ -248,5 +262,5 @@ this.setState({
     )
   }
 }
-
-export default withRouter(GenerateReport);
+const GenerateReport = connect(null, mapDispatchToProps)(ReportToGenerate)
+export default GenerateReport;
